@@ -112,4 +112,44 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		return actors;
 	}
 
+	@Override
+	public Film findFilmByQuery(String query) {
+		Film film = null;
+		Connection conn;
+		try {
+			conn = DriverManager.getConnection(URL, user, pwd);
+			String sql = "SELECT * FROM film WHERE film.title LIKE ? OR film.description LIKE ?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, "%" + query + "%");
+			ps.setString(2, "%" + query + "%");
+			ResultSet results = ps.executeQuery();
+
+			if (results.next()) {
+				film = new Film();
+
+				film.setId(results.getInt("id"));
+				film.setTitle(results.getString("title"));
+				film.setDescription(results.getString("description"));
+				film.setReleaseYear(results.getString("release_year"));
+				film.setLanguageId(results.getInt("language_id"));
+				film.setRentalDuration(results.getInt("rental_duration"));
+				film.setRentalRate(results.getDouble("rental_rate"));
+				film.setLength(results.getInt("length"));
+				film.setReplacementCost(results.getDouble("replacement_cost"));
+				film.setRating(results.getString("rating"));
+				film.setSpecialFeatures(results.getString("special_features"));
+				film.setActors(findActorsByFilmId(film.getId()));
+
+			}
+
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return film;
+	}
+
 }
