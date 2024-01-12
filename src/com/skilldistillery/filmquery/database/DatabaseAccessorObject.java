@@ -88,7 +88,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		List<Actor> actors = new ArrayList<>();
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pwd);
-			String sql = "SELECT * FROM film JOIN film_actor ON film.id = film_actor.film_id JOIN actor ON film_actor.actor_id = actor.id WHERE actor.id = ?";
+			String sql = "SELECT * FROM actor JOIN film_actor ON actor.id = film_actor.actor_id WHERE film_actor.film_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, filmId);
 			ResultSet rs = ps.executeQuery();
