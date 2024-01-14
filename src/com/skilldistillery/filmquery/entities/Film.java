@@ -15,6 +15,7 @@ public class Film {
 	private double replacementCost;
 	private String rating;
 	private String specialFeatures;
+	private String language;
 
 	private List<Actor> actors;
 
@@ -53,6 +54,33 @@ public class Film {
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
 		this.actors = actors;
+	}
+
+	public String getLanguage() {
+		switch (languageId) {
+		case 1:
+			language = "English";
+			break;
+		case 2:
+			language = "Italian";
+			break;
+		case 3:
+			language = "Japanese";
+			break;
+		case 4:
+			language = "Mandarin";
+			break;
+		case 5:
+			language = "French";
+			break;
+		case 6:
+			language = "German";
+			break;
+		default:
+			language = "Unknown";
+			break;
+		}
+		return language;
 	}
 
 	public String getTitle() {
@@ -176,10 +204,41 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film id: " + id + "\n title: " + title + ", description: " + description + ", releaseYear: " + releaseYear
-				+ "\n language id: " + languageId + ", rental duration: " + rentalDuration + ", rental rate: " + rentalRate
-				+ ", length: " + length + ", replacement cost: " + replacementCost + ", rating: " + rating
-				+ ", special features: " + specialFeatures + "\n Actors: \n" + actors.toString();
+		StringBuilder sb = new StringBuilder();
+		sb.append("Film id: ").append(id).append("\n").append(" title: ").append(title).append(", description: ")
+				.append(description).append(", releaseYear: ").append(releaseYear).append("\n").append(" language id: ")
+				.append(languageId).append(", rental duration: ").append(rentalDuration).append(", rental rate: ")
+				.append(rentalRate).append(", length: ").append(length).append(", replacement cost: ")
+				.append(replacementCost).append(", rating: ").append(rating).append(", special features: ")
+				.append(specialFeatures).append("\n").append("Actors: \n");
+
+		for (Actor actor : actors) {
+			sb.append("  ").append(actor.getFirstName()).append(" ").append(actor.getLastName()).append("\n");
+		}
+
+		return sb.toString();
+	}
+
+	public String printActors() {
+		StringBuilder sb = new StringBuilder();
+
+		for (Actor actor : actors) {
+			sb.append("  ").append(actor.getFirstName()).append(" ").append(actor.getLastName()).append("\n");
+		}
+
+		return sb.toString();
+
+	}
+
+	public String printActors(List<Actor> actors) {
+		StringBuilder sb = new StringBuilder();
+
+		for (Actor actor : actors) {
+			sb.append("  ").append(actor.getFirstName()).append(" ").append(actor.getLastName()).append("\n");
+		}
+
+		return sb.toString();
+
 	}
 
 }

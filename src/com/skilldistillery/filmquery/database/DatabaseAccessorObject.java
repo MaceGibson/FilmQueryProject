@@ -113,8 +113,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	}
 
 	@Override
-	public Film findFilmByQuery(String query) {
-		Film film = null;
+	public List<Film> findFilmByQuery(String query) {
+		List<Film> films = new ArrayList<>();
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(URL, user, pwd);
@@ -125,8 +125,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			ps.setString(2, "%" + query + "%");
 			ResultSet results = ps.executeQuery();
 
-			if (results.next()) {
-				film = new Film();
+			while (results.next()) {
+				Film film = new Film();
 
 				film.setId(results.getInt("id"));
 				film.setTitle(results.getString("title"));
@@ -139,8 +139,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setReplacementCost(results.getDouble("replacement_cost"));
 				film.setRating(results.getString("rating"));
 				film.setSpecialFeatures(results.getString("special_features"));
-				film.setActors(findActorsByFilmId(film.getId()));
+				film.setActors(findActorsByFilmId(results.getInt("id")));
 
+				films.add(film);
 			}
 
 			ps.close();
@@ -149,7 +150,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			e.printStackTrace();
 		}
 
-		return film;
+		return films;
 	}
 
 }
