@@ -12,15 +12,15 @@ This project is a Java application that interacts with a MySQL database to query
 ## How to Use
 1. Clone the repository to your local machine:
 
-	git clone https://github.com/your-username/FilmQueryProject.git
+	```git clone https://github.com/your-username/FilmQueryProject.git```
 
 2. Set up your MySQL database and update the database connection details in the `DatabaseAccessorObject` class.
 
 3. Run the `FilmQueryApp` class to launch the user interface.
 
-	cd FilmQueryProject/src/com/skilldistillery/filmquery/app
+	```cd FilmQueryProject/src/com/skilldistillery/filmquery/app
 	javac FilmQueryApp.java
-	java FilmQueryApp
+	java FilmQueryApp```
 
 4. Follow the prompts to query films by their ID, keyword, or exit the program.
 
