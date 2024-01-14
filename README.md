@@ -18,9 +18,11 @@ This project is a Java application that interacts with a MySQL database to query
 
 3. Run the `FilmQueryApp` class to launch the user interface.
 
-	```cd FilmQueryProject/src/com/skilldistillery/filmquery/app```
-	```javac FilmQueryApp.java```
-	```java FilmQueryApp```
+	```
+	cd FilmQueryProject/src/com/skilldistillery/filmquery/app
+	javac FilmQueryApp.java
+	java FilmQueryApp
+	```
 
 4. Follow the prompts to query films by their ID, keyword, or exit the program.
 
